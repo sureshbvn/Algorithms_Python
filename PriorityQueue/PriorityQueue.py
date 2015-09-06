@@ -41,6 +41,21 @@ class Heap:
         self.percolateUp(self.size)
     def printHeap(self):
         print self.heap
+
+
+    #build the heap given the array
+    def build_heap(self,array):
+         len_of_array=len(array)
+         index=len_of_array//2
+         self.heap=[0]+array[:]
+         while index>0:
+             self.percolateDown(index)
+             index=index-1
+
+
+
+
+
 if __name__=="__main__":
     queue=Heap()
     queue.insertElement(1)
@@ -59,6 +74,7 @@ if __name__=="__main__":
 
     queue.insertElement(5)
 
-
+    #a=[2,5,3,32]
+    #queue.build_heap(a)
     queue.printHeap()
 

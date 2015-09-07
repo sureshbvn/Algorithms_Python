@@ -12,6 +12,7 @@ class Heap:
     def getMinChildIndex(self,i):
         if 2*i>self.size:
             return None
+
         if (2*i)+1>self.size:
             return 2*i
         else:
@@ -20,13 +21,26 @@ class Heap:
             else:
                 return (2*i)+1
 
+    def getMaxChildIndex(self,i):
+        if 2*i>self.size:
+            return None
+
+        if (2*i)+1>self.size:
+            return 2*i
+        else:
+            if self.heap[2*i]>self.heap[(2*i)+1]:
+                return 2*i
+            else:
+                return (2*i)+1
+
     def percolateDown(self,i):
-        while 2*i>self.size:
-            if(self.heap[i]<self.heap[self.getMinChildIndex(i)]):
+        while 2*i<=self.size:
+            min=self.getMaxChildIndex(i)
+            if(self.heap[i]<self.heap[min]):
                 temp=self.heap[i]
-                self.heap[i]=self.heap[self.getMinChildIndex(i)]
-                self.heap[self.getMinChildIndex(i)]=temp
-            i=self.getMinChildIndex(i)
+                self.heap[i]=self.heap[min]
+                self.heap[min]=temp
+            i=min
 
     def percolateUp(self,i):
         while i//2>0:
@@ -48,6 +62,7 @@ class Heap:
          len_of_array=len(array)
          index=len_of_array//2
          self.heap=[0]+array[:]
+         self.size=len_of_array#for zero
          while index>0:
              self.percolateDown(index)
              index=index-1
@@ -58,6 +73,7 @@ class Heap:
 
 if __name__=="__main__":
     queue=Heap()
+    """
     queue.insertElement(1)
     queue.insertElement(13)
 
@@ -73,8 +89,9 @@ if __name__=="__main__":
     queue.insertElement(100)
 
     queue.insertElement(5)
+    """
 
-    #a=[2,5,3,32]
-    #queue.build_heap(a)
+    a=[2,4,3,1,17,1,322,43]
+    queue.build_heap(a)
     queue.printHeap()
 
